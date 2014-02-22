@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title>Mafia</title>
+	<link rel='stylesheet' type='text/css' href='./css/bootstrap.min.css' />
+	<link rel='stylesheet' type='text/css' href='./css/mafia.css' />
+</head>
+<body onresize='resize()'>
+	<div id='view'>
+		<div id='view-click-cover'></div>
+		<div id='view-background' class='noise'></div>
+		<div class='navigation'>
+			<div class='mcontainer'>
+				<span>Mafia</span>
+				<button onclick='ToggleNavigation()' class='btn-menu pull-left'>
+					<div></div><div></div><div></div>
+				</button>
+				<button onclick='ToggleNavigation()' class='btn-menu pull-right'>
+					<span class='glyphicon glyphicon-cog' style='color:white;font-size:2em;'></span>
+				</button>
+			</div>
+		</div>
+		<div id='edit-game-page' class='mcontainer page' style='display:none'>
+			<div class='mrow'>
+				<div class='col-4'><select id='player-count'></select></div>
+				<div class='col-4'><select id='civilian-count'></select></div>
+				<div class='col-4'><select id='mafia-count'></select></div>
+			</div>
+			<div class='mrow'>
+				<div class='col-6'>
+					<button style='width:100%;height:6rem;font-size:2em;background-color:#404040;border: 0.0em solid #000040;text-align:left;padding-left:2rem;padding-right:2rem;color:white;'>Civilian Professions <span style='float:right'>3</span></button>
+					<button style='width:100%;height:4rem;font-size:2em;border:0px solid white;border-top:0.1em solid black;text-align:left;padding-left:4rem;padding-right:4rem;'>Bodyguard</button>
+					<button style='width:100%;height:4rem;font-size:2em;border:0px solid white;border-top:0.05em solid grey;text-align:left;padding-left:4rem;padding-right:4rem;'>Doctor</button>
+					<button style='width:100%;height:4rem;font-size:2em;border:0px solid white;border-top:0.05em solid grey;text-align:left;padding-left:4rem;padding-right:4rem;'>Sheriff</button>
+					<button style='width:100%;height:4rem;font-size:2em;border:0px solid white;border-top:0.05em solid grey;text-align:left;padding-left:4rem;padding-right:4rem;'>Nurse</button>
+					<button style='width:100%;height:4rem;font-size:2em;border:0px solid white;border-top:0.05em solid grey;text-align:left;padding-left:4rem;padding-right:4rem;'>Reporter</button>
+					<button style='width:100%;height:4rem;font-size:2em;border:0px solid white;border-top:0.05em solid grey;text-align:left;padding-left:4rem;padding-right:4rem;'>Medic</button>
+					<button style='width:100%;height:3em;font-size:2em;background-color:pink;border: 0.0em solid #400000;text-align:left;padding-left:2rem;padding-right:2rem;'>Mafia Professions (1)</button>
+					<div style='background-color:lightblue;display:none'>
+						<h3>Civilian Professions <span id='civilian-profession-count'></span></h3>
+						<div id='civilian-list'></div>
+					</div>
+					<div style='background-color:pink;display:none'>
+						<h3>Mafia Professions <span id='mafia-profession-count'></span></h3>
+						<div id='mafia-list'></div>
+					</div>
+				</div>
+				<div class='col-6'>
+					<button style='width:100%;height:3em;font-size:2em;background-color:lightgreen;border: 0.0em solid #004000;text-align:left;padding-left:2rem;padding-right:2rem;'>Traits (12)</button>
+					<div style='background-color:lightgreen;display:none'>
+						<h3>Traits <span id='trait-count'></span></h3>
+						<div id='trait-list'></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id='game-page' class='mcontainer page'>
+			<div class="list-group"></div>
+		</div>
+		<div id='card-page' class='mcontainer page' style='display:none;'>
+			<select id='player-name'>
+				<option>James</option>
+				<option>Tiranee</option>
+				<option>David</option>
+				<option>Stef</option>
+				<option>Chris</option>
+			</select>
+		</div>
+	</div>
+	<div id='navigation' class='noise' style='display:none;>
+		<div class='form-group'>
+			<label>Navigation</label>
+			<div class="list-group">
+				<a id='show-game-page' class="list-group-item">Play Game</a>
+				<a id='show-edit-game-page' class="list-group-item">Edit Game</a>
+				<a id='show-card-page' class="list-group-item">View Cards</a>
+				<a class="list-group-item">Turn Order</a>
+				<a class="list-group-item">Rules</a>
+			</div>
+		</div>
+	</div>
+	<div id='player-edit' class='noise' style='display:none;'>
+		<div class='form-group'>
+			<label>Name</label>
+			<input id='player-edit-name' type="text" class="form-control" placeholder="Player">
+		</div>
+		<div class='form-group'>
+			<label>Status</label>
+			<ul id='player-edit-status' class="list-group">
+			  <li id='Alive' class="list-group-item">Alive</li>
+			  <li id='Dying' class="list-group-item">Dying</li>
+			  <li id='Dead' class="list-group-item">Dead</li>
+			</ul>
+		</div>
+		<div class='form-group'>
+			<label>Notes</label>
+			<input id='player-edit-note' type="text" rows=3 class="form-control" placeholder="Notes...">
+		</div>
+		<div class='form-group'>
+			<label>Actions</label>
+			<button id='player-edit-remove' class='btn btn-block'>Remove Player</button>
+		</div>
+	</div>
+</body>
+<script src='./js/jquery-1.10.2.min.js'></script>
+<script src='./js/bootstrap.min.js'></script>
+<script src='./js/mafia.js'></script>
+</html>

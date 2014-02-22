@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' />
+	<title>Mafia</title>
+	<link rel='stylesheet' type='text/css' href='./css/bootstrap.min.css' />
+	<link rel='stylesheet' type='text/css' href='./css/tablet.css' />
+	<link rel='stylesheet' type='text/css' href='./css/mafia.css' />
+</head>
+<body onresize='resize()'>
+	<div id='view-background'></div>
+	<div id='view'>
+		<div id='view-click-cover'></div>
+		<div class='navigation'>
+			<div class='mcontainer'>
+				<button class='navigation-button left'>
+					<span class='glyphicon glyphicon-list' style='color:white;font-size:2rem;'></span>
+				</button>
+				<button id='game-page-action-button' onclick='ShowGameAction()' class='action-button right'>
+					<span class='glyphicon glyphicon-cog' style='color:white;font-size:2rem;'></span>
+				</button>
+			</div>
+		</div>
+		<div id='edit-game-page' class='page'>
+			<div class='mrow'>
+				<div class='col-4'><select id='player-count'></select></div>
+				<div class='col-4'><select id='civilian-count'></select></div>
+				<div class='col-4'><select id='mafia-count'></select></div>
+			</div>
+			<div class='mrow mcontainer'>
+				<div class='col-6'>
+					<div>
+						<h3>Civilian Professions <span id='civilian-profession-count'></span></h3>
+						<div id='civilian-list'></div>
+					</div>
+					<div>
+						<h3>Mafia Professions <span id='mafia-profession-count'></span></h3>
+						<div id='mafia-list'></div>
+					</div>
+				</div>
+				<div class='col-6'>
+					<div>
+						<h3>Traits <span id='trait-count'></span></h3>
+						<div id='trait-list'></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id='game-page' class='page'>
+			<div id='player-list'></div>
+		</div>
+		<div id='card-page' class='page'>
+			<select id='player-name'>
+				<option data-role='Sheriff' data-trait='Magician'>James</option>
+				<option data-role='Mafia' data-trait='Fast Plague'>Tiranee</option>
+			</select>
+			<div style='position:fixed;width:100%;color:#FFFFFF;text-align:center;font-size:4rem;bottom:2rem;'>
+				<div>
+					<span id='role-name'>Civilian</span>
+				</div>
+				<div>
+					<span id='trait-name'>No Trait</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id='navigation' class='noise side-pane navigation-pane'>
+		<label>Navigation</label>
+		<button id='show-game-page' class='active'>
+			<span class='glyphicon glyphicon-user yellow'></span>
+			&nbsp;Game
+		</button>
+		<button id='show-edit-game-page'>
+			<span class='glyphicon glyphicon-check red'></span>
+			&nbsp;Roles
+		</button>
+		<button id='show-card-page'>
+			<span class='glyphicon glyphicon-picture blue'></span>
+			&nbsp;Cards
+		</button>
+	</div>
+	<div id='player-action' class='noise side-pane action-pane'>
+		<div class='form-group'>
+			<label>Name</label>
+			<input id='player-action-name' type="text" class="form-control" placeholder="Player">
+		</div>
+		<div class='form-group'>
+			<label>Status</label>
+			<ul id='player-action-status' class="list-group">
+			  <li id='Alive' class="list-group-item">&#x1f60a;&nbsp;&nbsp;&nbsp;Alive</li>
+			  <li id='Dying' class="list-group-item">&#x1f611;&nbsp;&nbsp;&nbsp;Dying</li>
+			  <li id='Dead' class="list-group-item">&#x1f629;&nbsp;&nbsp;&nbsp;Dead</li>
+			</ul>
+		</div>
+		<div class='form-group'>
+			<label>Notes</label>
+			<input id='player-action-note' type="text" rows=3 class="form-control" placeholder="Notes...">
+		</div>
+		<div class='form-group'>
+			<label>Actions</label>
+			<button id='player-action-remove' class='btn btn-block'>Remove Player</button>
+		</div>
+	</div>
+	<div id='game-action' class='noise side-pane action-pane'>
+		<div class='form-group'>
+			<label>Game Actions</label>
+			<button id='game-action-reset-status' class='btn btn-block'>Reset Player Statuses</button>
+		</div>
+		<div class='form-group'>
+			<button id='game-action-reassign-roles' class='btn btn-block'>Reassign Roles</button>
+		</div>
+		<div class='form-group'>
+			<button id='game-action-new-game' class='btn btn-block'>New Game</button>
+		</div>
+	</div>
+</body>
+<script src='./js/jquery-1.10.2.min.js'></script>
+<script src='./js/bootstrap.min.js'></script>
+<script src='./js/tablet.js'></script>
+<script src='./js/mafia.js'></script>
+</html>
