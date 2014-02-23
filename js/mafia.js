@@ -1,4 +1,4 @@
-$(document).ready(init(), resize());
+$(document).ready(init());
 
 var player_count;
 var civilian_count;
@@ -8,8 +8,6 @@ var mafia_profession_count;
 var trait_count;
 var role_names = [];
 var trait_names = [];
-
-function resize () { }
 
 /* Initialization and Setup */
 //{
@@ -173,6 +171,13 @@ function UpdateFromMafia() {
 
 /* Game Page */
 //{
+$('#game-page-new-game').on('click', function(){
+	NewGame();
+	if ($('#player-list').children().length > 0) {
+		$(this).hide();
+	}
+});
+
 function AddPlayer(param) {
 	param = param || {};
 	name = param.name || 'Player';
@@ -187,7 +192,8 @@ function AddPlayer(param) {
 	player.data('trait', trait);
 	AssignColor(player);
 	player.on('click', function(){
-		ShowPlayerAction($(this));
+		LoadPlayer($(this));
+		ShowRightPane('player-action');
 	})
 	$('#game-page>#player-list').append(player);
 	if (param.animate) {
@@ -256,7 +262,7 @@ $('#player-action-status>li').on('click', function(){
 	player.data('status', $(this).attr('id'));
 	player.removeClass('Alive Dying Dead');
 	player.addClass($(this).attr('id'));
-	CloseMenu();
+	ClosePane();
 });
 
 $('#player-action-note').on('change', function(){
@@ -275,7 +281,7 @@ $('#player-action-remove').on('click', function()
 	param.trait = player.data('trait');
 	param.animate = true;
 	AddPlayer(param);
-	CloseMenu();
+	ClosePane();
 });
 //}
 
@@ -289,7 +295,7 @@ $('#game-action-new-game').on('click', NewGame);
 
 function ResetPlayerStatuses(){
 	$('.player').removeClass('Dying Dead').addClass('Alive').data('status', 'Alive');
-	CloseMenu();
+	ClosePane();
 }
 
 function ShuffleRoles(){
@@ -311,7 +317,7 @@ function ShuffleRoles(){
 		AddPlayer(param);
 	}
 	
-	CloseMenu();
+	ClosePane();
 }
 
 function NewGame(){

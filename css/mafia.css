@@ -19,24 +19,16 @@ body{
 	box-shadow:0 0 2rem 1rem #000000;
 	z-index:1;
 }
-#view-click-cover{
-	display:none;
-	position:fixed;
-	width:100%;
-	height:100%;
-	top:0;
-	z-index:999;
-	background-color:transparent;
-	cursor:pointer;
-}
 .page{
 	margin-bottom:3rem;
 }
 /******************/
 /* Navigation Bar */
 /******************/
-.navigation,.navigation button{
+#navigation-bar,#navigation-bar button{
 	background-color:maroon;
+	color:white;
+	font-size:2rem;
 }
 /*************/
 /* Edit Game */
@@ -77,9 +69,12 @@ body{
 /********/
 /* Game */
 /********/
-#mgame-page #player-list{
-	column-count:3;
-	column-gap:0;
+#game-page-new-game{
+	border:1rem solid rgb(64,64,64);
+	background-color:rgb(255,255,255);
+	width:100%;
+	height:10rem;
+	font-size:2rem;
 }
 /****************/
 /* Player State */

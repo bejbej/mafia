@@ -1,48 +1,47 @@
 /* Navigation */
 //{
-$('.navigation-button').on('click', ShowNavigation);
+$('#view-click-cover').on('click', ClosePane);
 
-$('#view-click-cover').on('click', CloseMenu);
-
-function ShowNavigation () {
+/* Show a pane on the right side of the screen. */
+function ShowRightPane(id){
 	$('.side-pane').hide();
 	$('#view-click-cover').show();
-	$('#navigation').show();
-	$('#view,#view-background').animate({left:'24rem'},200);
+	$('#'+id).css({left:''})
+	         .css({right:'0'})
+	         .show();
+	$('#content>div').css({left:'-24rem'},100);
 }
 
-function ShowPlayerAction(player){
+/* Show a pane on the left side of the screen. */
+function ShowLeftPane(id){
 	$('.side-pane').hide();
 	$('#view-click-cover').show();
-	$('#player-action').show();
-	$('#view,#view-background').animate({left:'-24rem'},200);
-	LoadPlayer(player);
+	$('#'+id).css({right:''})
+	         .css({left:'0'})
+	         .show();
+	$('#content>div').css({left:'24rem'},100);
 }
 
-function ShowGameAction(){
-	$('.side-pane').hide();
-	$('#view-click-cover').show();
-	$('#game-action').show();
-	$('#view,#view-background').animate({left:'-24rem'},200);
-}
-
-function CloseMenu () {
+/* Close the currently open pane if any. */
+function ClosePane(){
 	$('#view-click-cover').hide();
-	$('#view,#view-background').animate({left:'0'},200);
+	$('#content>div').css({left:'0'},100);
 }
 
-$('.navigation-pane>button').on('click', function(){
+/* Show the page with the given id. */
+/* Also updates the navigation buttons if possible. */
+function ShowPage(id){
 	$('.navigation-pane>button').removeClass('active');
-	$(this).addClass('active');
+	$('#show-'+id).addClass('active');
 
 	$('.page').hide();
 	$('.action-button').hide();
 
-	var pagename = $(this).attr('id').replace(/^show-/, '');
-	$('#'+pagename).show();
-	$('#'+pagename+'-action-button').show();
-	CloseMenu();
-});
+	$('#'+id).show();
+	$('#'+id+'-action-button').show();
+	
+	ClosePane();
+}
 //}
 
 
