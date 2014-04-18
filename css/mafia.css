@@ -28,7 +28,10 @@ body{
 #navigation-bar,#navigation-bar button{
 	background-color:maroon;
 	color:white;
-	font-size:2rem;
+}
+#navigation-bar button{
+	background-color:#a02020;
+	border:0.1rem solid #600000;
 }
 /*************/
 /* Edit Game */
@@ -36,8 +39,11 @@ body{
 #edit-game-page{
 	color:#FFFFFF;
 }
+#edit-game-page h3{
+	color:#808080;
+}
 .check-label{
-	margin-left:0.5rem;
+	margin-left:1.5rem;
 	font-weight:normal;
 	font-size:2rem;
 }
@@ -65,6 +71,9 @@ body{
 	opacity:1.0;
 	cursor:pointer;
 	z-index:1;
+}
+#civilian-list>div,#mafia-list>div,#trait-list>div{
+	margin-top:1.5rem;
 }
 /********/
 /* Game */

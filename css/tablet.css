@@ -62,38 +62,6 @@ h4{
 .right{
 	float:right;
 }
-/**************/
-/* List Group */
-/**************/
-.mlist-group{
-	margin-bottom:20px;
-	padding-left:0;
-}
-.mlist-group-item{
-	position:relative;
-	display:block;
-	padding:1rem 1.5rem;
-	margin-bottom: -0.1rem;
-	color:black;
-	background-color:white;
-	border:0.1rem solid #dddddd;
-	cursor:pointer
-}
-.mlist-group-item:first-child{
-	*border-top-left-radius: 0.4em;
-	*border-top-right-radius: 0.4em;
-}
-.mlist-group-item:last-child{
-	*border-bottom-left-radius: 0.4em;
-	*border-bottom-right-radius: 0.4em;
-}
-.mlist-group-item .mlist-group-item-heading{
-	margin-top:0rem;
-	margin-bottom:0.5rem;
-}
-.mlist-group-item .mlist-group-item-text{
-	margin-bottom:0px;
-}
 /********/
 /* Page */
 /********/
@@ -106,20 +74,19 @@ h4{
 /********************/
 /* View Click Cover */
 /********************/
-#view-click-cover{
-	display:none;
+.view-click-cover{
 	position:fixed;
 	width:100%;
 	height:100%;
 	top:0;
-	z-index:999;
+	z-index:99;
 	background-color:transparent;
 	cursor:pointer;
 }
 /******************/
 /* Navigation Bar */
 /******************/
-#navigation-bar{
+.navigation-bar{
 	position:fixed;
 	width:100%;
 	height:5rem;
@@ -128,22 +95,27 @@ h4{
 	margin-bottom:2rem;
 	z-index:99;
 }
-#navigation-bar>.mcontainer{
+.navigation-bar>.mcontainer{
 	text-align:center;
 	vertical-align:middle;
 }
-#navigation-bar>.mcontainer>span{
+.navigation-bar>.mcontainer>span{
 	position:relative;
 	top:1.5rem;
 	color:white;
 	font-size:1.5rem;
 }
-#navigation-bar button{
+.navigation-bar button{
 	display:block;
-	width:5rem;
-	height:5rem;
+	height:4rem;
+	margin-top:0.5rem;
 	border:0px;
 	background-color:#404040;
+	border:0.1rem solid #808080;
+	border-radius:0.5rem;
+	padding-left:1.5rem;
+	padding-right:1.5rem;
+	font-size:1.5rem;
 }
 /*************/
 /* Side Pane */
@@ -156,9 +128,11 @@ h4{
 	top:0;
 	color:#999999;
 	background-color:#000000;
-	border:0.1em solid #080808;
+	border:0em solid #080808;
+	border-left:0.1rem solid black;
+	border-right:0.1rem solid black;
 	font-size:1.5rem;
-	z-index:0;
+	z-index:100;
 	padding-top:2rem;
 	padding-bottom:2rem;
 	overflow:auto;

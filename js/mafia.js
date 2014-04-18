@@ -63,7 +63,7 @@ function AddTrait(array) {
 }
 
 function AddCheckBoxTo(object, class_name, name) {
-	object.append("<div><label class='check0'><div class='check' /><span class='check-label'>"+name+"</span><input type='checkbox' class='"+class_name+"' name='"+name+"' autocomplete='off' style='display:none;'></label></div>");
+	object.append("<div><label><div class='check' /><span class='check-label'>"+name+"</span><input type='checkbox' class='"+class_name+"' name='"+name+"' autocomplete='off' style='display:none;'></label></div>");
 }
 //}
 
@@ -219,7 +219,7 @@ function AssignColor(player){
 /* Card Page */
 //{
 $('#navigation>#show-card-page').on('click', function(){
-	var select = $('#card-page>#player-name');
+	var select = $('#card-page #player-name');
 	select.children().remove();
 	$('.player').each(function(){
 		var option = $('<option></option>');
@@ -228,6 +228,7 @@ $('#navigation>#show-card-page').on('click', function(){
 		option.data('trait', $(this).data('trait'));
 		select.append(option);
 	});
+	$('#card-page #player-name').change();
 });
 
 $('#card-page #player-name').on('change', function(){
@@ -235,7 +236,6 @@ $('#card-page #player-name').on('change', function(){
 	$('#card-page #role-name').html(player.data('role'));
 	$('#card-page #trait-name').html(player.data('trait'));
 });
-
 //}
 
 /* Player Action */

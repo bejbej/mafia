@@ -8,62 +8,50 @@
 	<link rel='stylesheet' type='text/css' href='./css/mafia.css' />
 </head>
 <body>
-	<div id='content'>
-		<div id='view-background'></div>
-		<div id='view-click-cover'></div>
-		<div id='navigation-bar'>
-			<div class='mcontainer'>
-				<button class='navigation-button left' onclick='ShowLeftPane("navigation")'>
-					<span class='glyphicon glyphicon-list'></span>
-				</button>
-				<button id='game-page-action-button' onclick='ShowRightPane("game-action")' class='action-button right'>
-					<span class='glyphicon glyphicon-cog'></span>
-				</button>
+	<div id='view-background'></div>
+	<div id='navigation-bar' class='navigation-bar'>
+		<div class='mcontainer'>
+			<button class='navigation-button left' onclick='ShowLeftPane("navigation")'>
+				MENU
+			</button>
+			<button id='game-page-action-button' onclick='NewGame()' class='action-button right'>
+				New Game
+			</button>
+		</div>
+	</div>
+	<div id='view'>
+		<div id='edit-game-page' class='page'>
+			<div class='mrow'>
+				<div class='col-4'><select id='player-count'></select></div>
+				<div class='col-4'><select id='mafia-count'></select></div>
+				<div class='col-4'><select id='civilian-count'></select></div>
+			</div>
+			<div class='mrow mcontainer'>
+				<div class='col-6'>
+					<div>
+						<h3>Civilian Professions <span id='civilian-profession-count'></span></h3>
+						<div id='civilian-list'></div>
+					</div>
+					<div>
+						<h3>Mafia Professions <span id='mafia-profession-count'></span></h3>
+						<div id='mafia-list'></div>
+					</div>
+				</div>
+				<div class='col-6'>
+					<div>
+						<h3>Traits <span id='trait-count'></span></h3>
+						<div id='trait-list'></div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div id='view'>
-			<div id='edit-game-page' class='page'>
-				<div class='mrow'>
-					<div class='col-4'><select id='player-count'></select></div>
-					<div class='col-4'><select id='mafia-count'></select></div>
-					<div class='col-4'><select id='civilian-count'></select></div>
-				</div>
-				<div class='mrow mcontainer'>
-					<div class='col-6'>
-						<div>
-							<h3>Civilian Professions <span id='civilian-profession-count'></span></h3>
-							<div id='civilian-list'></div>
-						</div>
-						<div>
-							<h3>Mafia Professions <span id='mafia-profession-count'></span></h3>
-							<div id='mafia-list'></div>
-						</div>
-					</div>
-					<div class='col-6'>
-						<div>
-							<h3>Traits <span id='trait-count'></span></h3>
-							<div id='trait-list'></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id='game-page' class='page'>
-				<button id='game-page-new-game'>New Game</button>
-				<div id='player-list'></div>
-			</div>
-			<div id='card-page' class='page'>
-				<select id='player-name'>
-					<option data-role='Sheriff' data-trait='Magician'>James</option>
-					<option data-role='Mafia' data-trait='Fast Plague'>Tiranee</option>
-				</select>
-				<div style='position:fixed;width:100%;color:#FFFFFF;text-align:center;font-size:4rem;bottom:2rem;'>
-					<div>
-						<span id='role-name'>Civilian</span>
-					</div>
-					<div>
-						<span id='trait-name'>No Trait</span>
-					</div>
-				</div>
+		<div id='game-page' class='page'>
+			<button id='game-page-new-game'>New Game</button>
+			<div id='player-list'></div>
+		</div>
+		<div id='card-page' class='page'>
+			<div style='position:fixed;width:100%;height:100%;background-color:green;'>
+				<select id='player-name'></select>
 			</div>
 		</div>
 	</div>

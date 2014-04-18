@@ -1,31 +1,39 @@
 /* Navigation */
 //{
-$('#view-click-cover').on('click', ClosePane);
+/* Show a pane on the specified side of the screen. */
+function ShowPane(id, location){
+	$('.side-pane').hide();
+
+	var css = {};
+	var css2 = {};
+	css[location] = '-24rem';
+	css2[location] = '0';
+
+	$('#'+id).css({left:''})
+	         .css({right:''})
+	         .css(css)
+	         .show()
+	         .animate(css2, 80);
+
+	var click_cover = $("<div class='view-click-cover'></div>");
+	click_cover.on('click', ClosePane);
+	$('body').append(click_cover);
+}
 
 /* Show a pane on the right side of the screen. */
 function ShowRightPane(id){
-	$('.side-pane').hide();
-	$('#view-click-cover').show();
-	$('#'+id).css({left:''})
-	         .css({right:'0'})
-	         .show();
-	$('#content>div').css({left:'-24rem'},100);
+	ShowPane(id, 'right');
 }
 
 /* Show a pane on the left side of the screen. */
 function ShowLeftPane(id){
-	$('.side-pane').hide();
-	$('#view-click-cover').show();
-	$('#'+id).css({right:''})
-	         .css({left:'0'})
-	         .show();
-	$('#content>div').css({left:'24rem'},100);
+	ShowPane(id, 'left');
 }
 
 /* Close the currently open pane if any. */
 function ClosePane(){
-	$('#view-click-cover').hide();
-	$('#content>div').css({left:'0'},100);
+	$('.view-click-cover').remove();
+	$('.side-pane').hide();
 }
 
 /* Show the page with the given id. */
@@ -39,7 +47,7 @@ function ShowPage(id){
 
 	$('#'+id).show();
 	$('#'+id+'-action-button').show();
-	
+
 	ClosePane();
 }
 //}
