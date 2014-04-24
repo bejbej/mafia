@@ -17,6 +17,8 @@ function ShowPane(id, location){
 
 	var click_cover = $("<div class='view-click-cover'></div>");
 	click_cover.on('click', ClosePane);
+	click_cover.css({opacity:0})
+	           .animate({opacity: 0.5}, 80);
 	$('body').append(click_cover);
 }
 
