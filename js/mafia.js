@@ -167,15 +167,24 @@ function UpdateFromMafia() {
 		civilian_count = player_count - mafia_count;
 	}
 }
+
+$('#civilian-profession-count').parent().on('click', function(){
+	$('#civilian-list').toggle();
+});
+
+$('#mafia-profession-count').parent().on('click', function(){
+	$('#mafia-list').toggle();
+});
+
+$('#trait-count').parent().on('click', function(){
+	$('#trait-list').toggle();
+});
 //}
 
 /* Game Page */
 //{
 $('#game-page-new-game').on('click', function(){
 	NewGame();
-	if ($('#player-list').children().length > 0) {
-		$(this).hide();
-	}
 });
 
 function AddPlayer(param) {
@@ -347,6 +356,12 @@ function NewGame(){
 	current_traits = trait_names;
 	
 	ShuffleRoles();
+	
+	if ($('#player-list').children().length > 0) {
+		$('#game-page-new-game').hide();
+	} else {
+		$('#game-page-new-game').show();
+	}
 }
 
 function shuffle(array){
