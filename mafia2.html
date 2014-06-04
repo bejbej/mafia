@@ -50,9 +50,21 @@
 			<div id='player-list'></div>
 		</div>
 		<div id='card-page' class='page'>
-			<div style='position:fixed;width:100%;height:100%;background-color:green;'>
-				<select id='player-name'></select>
+			<div style='position:fixed;width:100%;z-index:3;'>
+				<select id='player-name' style='width:100%;height:5rem;opacity:0;'></select>
+				<div id='player-name-label'style='position:fixed;width:100%;height:5rem;top:5rem;line-height:5rem;text-align:center;font-size:2.5rem;'>NAME</div>
+				
 			</div>
+			<div>
+				<img src='./img/mafia.png' style='position:fixed;height:100%;width:100%;z-index-1'></img>
+			</div>
+			<div style='position:fixed;width:100%;height:10rem;bottom:0px;z-index:2;text-align:center;font-size:3rem;'>
+				<div id='role-name'>Sheriff</div>
+				<div id='trait-name'>Magician</div>
+			</div>
+			<div id='next-card' style='position:fixed;top:30%;bottom:30%;left:0;width:50%;background-color:red;'>Previous</div>
+			<div id='next-card' style='position:fixed;top:30%;bottom:30%;right:0;width:50%;background-color:red;'>Next</div>
+			<div id='previous-card'></div>
 		</div>
 	</div>
 	<div id='navigation' class='noise side-pane navigation-pane'>

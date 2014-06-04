@@ -23,18 +23,21 @@ function init () {
 	AddMafia(mafia_professions);
 	AddTrait(traits);
 	PopulateSelect();
-	$('.navigation-pane>button#show-edit-game-page').click();
+
+	UpdateModel();
+	UpdateFromPlayer();
+
+	NewGame();
+	ShowPage('edit-game-page');
 };
 
 function PopulateSelect () {
 	var player_select = $('#player-count');
-	player_select.append('<option value='+0+'>0 Players</option>');
-	player_select.append('<option value='+1+'>1 Player</option>');
-	for (var i=2; i<21; ++i)
+	for (var i=8; i<=20; ++i)
 		player_select.append('<option value='+i+'>'+i+' Players</option>');
 
 	var mafia_select = $('#mafia-count');
-	for (var i=0; i<21; ++i)
+	for (var i=1; i<=5; ++i)
 		mafia_select.append('<option value='+i+'>'+i+' Mafia</option>');
 
 	var civilian_select = $('#civilian-count');
@@ -76,6 +79,29 @@ function UpdateModel() {
 	civilian_profession_count = +$('#civilian-list .check-civilian').size();
 	mafia_profession_count = +$('#mafia-list .check-mafia').size();
 	trait_count = +$('#trait-list .check-trait').size();
+}
+
+function GetModel() {
+	var model = {}
+	model.player_count = +$('#player-count').val();
+	model.civilian_count = +$('#civilian-count').val();
+	model.mafia_count = +$('#mafia-count').val();
+	model.civilian_profession_count = +$('#civilian-list .check-civilian').size();
+	model.mafia_profession_count = +$('#mafia-list .check-mafia').size();
+	model.trait_count = +$('#trait-list .check-trait').size();
+	return model;
+}
+
+function SetModel(model) {
+	$('#player-count').val(model.player_count);
+	$('#civilian-count').val(model.civilian_count);
+	$('#mafia-count').val(model.mafia_count);
+	var civilian_profession_count_text = model.civilian_profession_count==0?'':'('+civilian_profession_count+')';
+	var mafia_profession_count_text = model.mafia_profession_count==0?'':'('+model.mafia_profession_count+')';
+	var trait_count_text = model.trait_count==0?'':'('+model.trait_count+')';
+	$('#civilian-profession-count').text(model.civilian_profession_count_text);
+	$('#mafia-profession-count').text(model.mafia_profession_count_text);
+	$('#trait-count').text(model.trait_count_text);
 }
 
 function ApplyModel() {
@@ -242,6 +268,7 @@ $('#navigation>#show-card-page').on('click', function(){
 
 $('#card-page #player-name').on('change', function(){
 	var player = $(this).find(':selected');
+	$('#player-name-label').html($(this).val());
 	$('#card-page #role-name').html(player.data('role'));
 	$('#card-page #trait-name').html(player.data('trait'));
 });
