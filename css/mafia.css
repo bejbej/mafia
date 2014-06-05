@@ -51,28 +51,43 @@ body{
 	text-align:left;
 	color:black;
 }
-.check-label{
-	margin-left:1.5rem;
-	font-weight:normal;
+#edit-game-page .checkbox{
+	display:block;
+	width:100%;
+	height:5rem;
+	background-color:transparent;
+	padding:0;
+	padding-left:1rem;
+	border:0 solid red;
 	font-size:2rem;
+	text-align:left;
+	color:white;
 }
 .check{
+	box-sizing:border-box;
+	position:relative;
 	width:1.5rem;
 	height:1.5rem;
-	margin-top:0.6rem;
+	top:2.25rem;
+	left:1rem;
 	border:0.2rem solid black;
 	float:left;
 }
-.check-civilian{
-	*background-color:#009dff;
+.check-label{
+	margin-left:2.5rem;
+	font-weight:normal;
+	font-size:2rem;
+	line-height:6rem;
+	float:left;
+}
+.checkbox-civilian.checked .check{
 	background-color:rgb(127,191,255);
 }
-.check-trait{
-	*background-color:#00b233;
+
+.checkbox-trait.checked .check{
 	background-color:rgb(95,255,95);
 }
-.check-mafia{
-	*background-color:#ff0000;
+.checkbox-mafia.checked .check{
 	background-color:rgb(255,95,95);
 }
 #player-count,#mafia-count,#civilian-count,#player-name{
@@ -83,9 +98,6 @@ body{
 	opacity:1.0;
 	cursor:pointer;
 	z-index:1;
-}
-#civilian-list>div,#mafia-list>div,#trait-list>div{
-	margin-top:1.5rem;
 }
 /********/
 /* Game */

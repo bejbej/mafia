@@ -6,11 +6,11 @@ var trait_names = [];
 /* Initialization and Setup */
 //{
 function init () {
-	mafia_professions = ['Escort','Thief','Spy','Mob Boss'];
-	civilian_professions = ['Bodyguard','Doctor','Medic','Nurse','Reporter','Sheriff'];
+	civilian_roles = ['Bodyguard','Doctor','Medic','Nurse','Reporter','Sheriff'];
+	mafia_roles = ['Escort','Thief','Spy','Mob Boss'];
 	traits = ['Alien','Assassin','Bus Driver','Mad Scientist','Witch','Idiot','Judge','Female Lover','Male Lover','Magician','Mute','Slow Plague','Fast Plague','Procrastinator','Stalker','Zombie'];
-	AddCivilian(civilian_professions);
-	AddMafia(mafia_professions);
+	AddCivilian(civilian_roles);
+	AddMafia(mafia_roles);
 	AddTrait(traits);
 	PopulateSelect();
 
@@ -21,53 +21,71 @@ function init () {
 
 function PopulateSelect () {
 	var player_select = $('#player-count');
-	for (var i=8; i<=20; ++i)
+	for (var i=0; i<=20; ++i)
 		player_select.append('<option value='+i+'>'+i+' Players</option>');
 
 	var mafia_select = $('#mafia-count');
-	for (var i=1; i<=5; ++i)
+	for (var i=0; i<=20; ++i)
 		mafia_select.append('<option value='+i+'>'+i+' Mafia</option>');
 
 	var civilian_select = $('#civilian-count');
-	civilian_select.append('<option value='+0+'>0 Civilians</option>');
-	civilian_select.append('<option value='+1+'>1 Civilian</option>');
-	for (var i=2; i<21; ++i)
+	for (var i=0; i<=21; ++i)
 		civilian_select.append('<option value='+i+'>'+i+' Civilians</option>');
 }
 
 function AddCivilian(array) {
-	for (i=0; i<array.length; ++i) {
-		AddCheckBoxTo($('#civilian-list'), 'civilian', array[i]);
-	}
+	for (i=0; i<array.length; ++i)
+		$('#civilian-list').append(CheckBoxFactory(array[i], 'civilian'));
 }
 
 function AddMafia(array) {
-	for (i=0; i<array.length; ++i) {
-		AddCheckBoxTo($('#mafia-list'), 'mafia', array[i]);
-	}
+	for (i=0; i<array.length; ++i)
+		$('#mafia-list').append(CheckBoxFactory(array[i], 'mafia'));
 }
 
 function AddTrait(array) {
-	for (i=0; i<array.length; ++i) {
-		AddCheckBoxTo($('#trait-list'), 'trait', array[i]);
-	}
+	for (i=0; i<array.length; ++i)
+		$('#trait-list').append(CheckBoxFactory(array[i], 'trait'));
 }
 
-function AddCheckBoxTo(object, class_name, name) {
-	object.append("<div><label><div class='check' /><span class='check-label'>"+name+"</span><input type='checkbox' class='"+class_name+"' name='"+name+"' autocomplete='off' style='display:none;'></label></div>");
+function CheckBoxFactory(name, class_name) {
+	var checkbox = $("<button class='checkbox checkbox-"+class_name+"'><div class='check'></div><div class='check-label'>"+name+"</div></button>");
+	switch (class_name) {
+		case 'civilian':
+			checkbox.on('click', function() {
+				checkbox.toggleClass('checked');
+				UpdateFromCivilian();
+			});
+			break;
+		case 'mafia':
+			checkbox.on('click', function() {
+				checkbox.toggleClass('checked');
+				UpdateFromMafia();
+			});
+			break;
+		case 'trait':
+			checkbox.on('click', function() {
+				checkbox.toggleClass('checked');
+				UpdateFromPlayer();
+			});
+			break;
+		default:
+			break;
+	}
+	return $(checkbox);
 }
 //}
 
 /* Edit Game */
 //{
 function GetModel() {
-	var model = {}
+	var model = {};
 	model.players = +$('#player-count').val();
 	model.civilians = +$('#civilian-count').val();
 	model.mafias = +$('#mafia-count').val();
-	model.civilian_roles = +$('#civilian-list .check-civilian').size();
-	model.mafia_roles = +$('#mafia-list .check-mafia').size();
-	model.traits = +$('#trait-list .check-trait').size();
+	model.civilian_roles = +$('#civilian-list .checkbox-civilian.checked').size();
+	model.mafia_roles = +$('#mafia-list .checkbox-mafia.checked').size();
+	model.traits = +$('#trait-list .checkbox-trait.checked').size();
 	return model;
 }
 
@@ -75,12 +93,12 @@ function SetModel(model) {
 	$('#player-count').val(model.players);
 	$('#civilian-count').val(model.civilians);
 	$('#mafia-count').val(model.mafias);
-	var civilian_professions_text = model.civilian_professions==0?'':'('+civilian_professions+')';
-	var mafia_professions_text = model.mafia_professions==0?'':'('+model.mafia_professions+')';
-	var traits_text = model.traits==0?'':'('+model.traits+')';
-	$('#civilian-profession-count').text(model.civilian_professions_text);
-	$('#mafia-profession-count').text(model.mafia_professions_text);
-	$('#trait-count').text(model.traits_text);
+	$('#civilian-profession-count')
+		.text(model.civilian_roles==0?'':'('+ model.civilian_roles+')');
+	$('#mafia-profession-count')
+		.text(model.mafia_roles==0?'':'('+model.mafia_roles+')');
+	$('#trait-count')
+		.text(model.traits==0?'':'('+model.traits+')');
 }
 
 $('#player-count').on('change', UpdateFromPlayer);
@@ -89,47 +107,22 @@ $('#mafia-count').on('change', UpdateFromMafia);
 
 $('#civilian-count').on('change', UpdateFromCivilian);
 
-$('.civilian').on('change', function() {
-	$(this).parent().children('.check').toggleClass('check-civilian');
-	var model = GetModel();
-	if (model.civilians<model.civilian_professions) {
-		model.civilians = model.civilian_professions;
-		UpdateFromCivilian();
-	}
-});
-
-$('.mafia').on('change', function() {
-	$(this).parent().children('.check').toggleClass('check-mafia');
-	var model = GetModel();
-	if (model.mafias<model.mafia_professions) {
-		model.mafias = model.mafia_professions;
-		UpdateFromMafia();
-	}
-});
-
-$('.trait').on('change', function() {
-	$(this).parent().children('.check').toggleClass('check-trait');
-	var model = GetModel();
-	if (model.players<model.traits) {
-		model.players = model.traits;
-		UpdateFromPlayer();
-	}
-});
-
 function UpdateFromPlayer() {
 	var model = GetModel();
+	model.players = model.players < model.traits? model.traits : model.players;
 	if (model.players > model.civilians + model.mafias ) {
 		model.civilians = model.players - model.mafias;
 	} else {
-		model.players = Math.max(model.civilian_professions + model.mafia_professions, model.players, model.traits);
-		model.civilians = Math.max(model.players - model.mafias, model.civilian_professions, model.traits - model.mafias);
-		model.mafias = Math.max(model.players - model.civilians, model.mafia_professions);
+		model.players = Math.max(model.civilian_roles + model.mafia_roles, model.players, model.traits);
+		model.civilians = Math.max(model.players - model.mafias, model.civilian_roles, model.traits - model.mafias);
+		model.mafias = Math.max(model.players - model.civilians, model.mafia_roles);
 	}
 	SetModel(model);
 }
 
 function UpdateFromCivilian() {
 	var model = GetModel();
+	model.civilians = model.civilians < model.civilian_roles? model.civilian_roles : model.civilians;
 	if (model.players < model.civilians + model.mafias ) {
 		model.mafias = Math.max(model.players - model.civilians, model.mafia_roles);
 		model.players = model.civilians + model.mafias;
@@ -142,6 +135,7 @@ function UpdateFromCivilian() {
 
 function UpdateFromMafia() {
 	var model = GetModel();
+	model.mafias = model.mafias < model.mafia_roles? model.mafia_roles : model.mafias;
 	if (model.players < model.civilians + model.mafias ) {
 		model.civilians = Math.max(model.players - model.mafias, model.civilian_roles);
 		model.players = model.civilians + model.mafias;
@@ -200,7 +194,7 @@ function AddPlayer(param) {
 function AssignColor(player){
 	var civilian_colors = ['rgb(63,127,255)','rgb(127,191,255)','rgb(95,159,255)'];
 	var mafia_colors = ['rgb(255,95,95)','rgb(255,127,127)'];
-	if (civilian_professions.indexOf(player.data('role')) > -1 || player.data('role') == 'Civilian'){
+	if (civilian_roles.indexOf(player.data('role')) > -1 || player.data('role') == 'Civilian'){
 		var color = civilian_colors[Math.floor(Math.random()*civilian_colors.length)];
 	} else {
 		var color = mafia_colors[Math.floor(Math.random()*mafia_colors.length)];
@@ -319,20 +313,20 @@ function NewGame(){
 	role_names = [];
 	trait_names = [];
 	
-	$('#civilian-list input:checked').each(function(){
-		role_names.push($(this).attr('name'));
+	$('#civilian-list .checkbox-civilian.checked').each(function(){
+		role_names.push($(this).find('.check-label').text());
 	});
 	for (i=role_names.length; i<model.civilians; ++i) {
 		role_names.push('Civilian');
 	}
-	$('#mafia-list input:checked').each(function(){
-		role_names.push($(this).attr('name'));
+	$('#mafia-list .checkbox-mafia.checked').each(function(){
+		role_names.push($(this).find('.check-label').text());
 	});
 	for (i=role_names.length; i<model.players; ++i) {
 		role_names.push('Mafia');
 	}
-	$('#trait-list input:checked').each(function(){
-		trait_names.push($(this).attr('name'));
+	$('#trait-list .checkbox-trait.checked').each(function(){
+		trait_names.push($(this).find('.check-label').text());
 	});
 	for (i=trait_names.length; i<model.mafias; ++i) {
 		trait_names.push('No Trait');
