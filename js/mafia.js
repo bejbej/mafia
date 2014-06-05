@@ -339,11 +339,11 @@ function ShuffleRoles(){
 	trait_names = shuffle(trait_names);
 	var player_names = [];
 	
-	$('.player').each(function(){
+	$('#game-page .player').each(function(){
 		player_names.push($(this).data('name'));
 	});
 
-	$('.player').remove();
+	$('#game-page .player').remove();
 
 	for (var i=0; i<role_names.length; ++i) {
 		param = {};

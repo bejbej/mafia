@@ -39,8 +39,17 @@ body{
 #edit-game-page{
 	color:#FFFFFF;
 }
-#edit-game-page h3{
-	color:#808080;
+#edit-game-page .checklist-heading{
+	display:block;
+	width:100%;
+	height:6rem;
+	background-color:transparent;
+	padding:0;
+	padding-left:1rem;
+	border:0 solid red;
+	font-size:2.5rem;
+	text-align:left;
+	color:black;
 }
 .check-label{
 	margin-left:1.5rem;
@@ -55,17 +64,20 @@ body{
 	float:left;
 }
 .check-civilian{
-	background-color:#009dff;
+	*background-color:#009dff;
+	background-color:rgb(127,191,255);
 }
 .check-trait{
-	background-color:#00b233;
+	*background-color:#00b233;
+	background-color:rgb(95,255,95);
 }
 .check-mafia{
-	background-color:#ff0000;
+	*background-color:#ff0000;
+	background-color:rgb(255,95,95);
 }
 #player-count,#mafia-count,#civilian-count,#player-name{
 	width:100%;
-	height:5rem;
+	height:6rem;
 	position:relative;
 	font-size:2.5rem;
 	opacity:1.0;
